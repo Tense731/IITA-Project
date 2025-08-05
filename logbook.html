@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Logbook Entry</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore-compat.js"></script>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyDbNz-RNef9HTz1QxqTF4SGdSlOd7zRCNE",
+      authDomain: "iitapro.firebaseapp.com",
+      projectId: "iitapro",
+      storageBucket: "iitapro.appspot.com",
+      messagingSenderId: "390594034949",
+      appId: "1:390594034949:web:a9560d8ab874addb654b6c"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+  </script>
+</head>
+
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+  <div class="bg-white p-8 rounded shadow-md w-full max-w-lg">
+    <h2 class="text-2xl font-bold text-green-700 mb-6 text-center">Logbook Entry</h2>
+
+    <form id="logbookForm" class="space-y-4">
+      <input type="date" id="date" required class="w-full border p-2 rounded" />
+      <textarea id="activity" rows="4" placeholder="Describe today's activity..." required class="w-full border p-2 rounded"></textarea>
+      <input type="number" id="hours" placeholder="Hours spent" required class="w-full border p-2 rounded" />
+
+      <button type="submit" class="bg-green-700 text-white w-full py-2 rounded hover:bg-green-800">Submit Entry</button>
+    </form>
+  </div>
+
+  <script>
+    auth.onAuthStateChanged((user) => {
+      if (!user) {
+        window.location.href = "login.html";
+      }
+
+      const logbookForm = document.getElementById("logbookForm");
+
+      logbookForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const date = document.getElementById("date").value;
+        const activity = document.getElementById("activity").value.trim();
+        const hours = parseFloat(document.getElementById("hours").value);
+
+        try {
+          await db.collection("logbook")
+            .doc(user.uid)
+            .collection("entries")
+            .add({
+              date,
+              activity,
+              hours,
+              timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            });
+
+          alert("Entry submitted!");
+          logbookForm.reset();
+        } catch (error) {
+          console.error("Error saving entry:", error);
+          alert("Failed to save entry.");
+        }
+      });
+    });
+  </script>
+</body>
+</html>

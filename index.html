@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IITA Logbook Portal</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .spinner { border-top-color: #fff; animation: spin 1s linear infinite; }
+    @keyframes spin { 100% { transform: rotate(360deg); } }
+  </style>
+</head>
+<body class="bg-gray-100">
+  <!-- Navbar -->
+  <header class="bg-white shadow fixed w-full z-50">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="flex items-center gap-2">
+        <img src="images/iita.png" alt="IITA Logo" class="h-12">
+      </div>
+      <div class="hidden md:flex items-center space-x-6">
+        <a href="index.html" class="text-sm text-gray-700 hover:text-green-700">Home</a>
+        <a href="entries.html" class="text-sm text-gray-700 hover:text-green-700">Entries</a>
+        <a href="report.html" class="text-sm text-gray-700 hover:text-green-700">Report</a>
+        <a href="dashboard.html" class="text-sm text-gray-700 hover:text-green-700">Dashboard</a>
+        <button class="bg-green-700 text-white px-4 py-1 rounded" ><a href="login.html">Login</a></button>
+        <button class="border border-green-700 text-green-700 px-4 py-1 rounded"><a href="signup.html">Sign Up</a></button>
+      </div>
+      <div class="md:hidden">
+        <button id="menuToggle" class="focus:outline-none">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="hidden md:hidden bg-white px-4 py-2 space-y-2">
+      <a href="index.html" class="block text-sm text-gray-700">Home</a>
+      <a href="entries.html" class="block text-sm text-gray-700">Entries</a>
+      <a href="report.html" class="block text-sm text-gray-700">Report</a>
+      <a href="dashboard.html" class="block text-sm text-gray-700">Dashboard</a>
+      <button class="w-full bg-green-700 text-white px-4 py-2 rounded">Login</button>
+      <button class="w-full border border-green-700 text-green-700 px-4 py-2 rounded">Sign Up</button>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="home" class="pt-28 pb-10 bg-green-100 text-center">
+    <h1 class="text-4xl font-bold text-green-800 mb-4">Welcome to IITA Logbook Portal</h1>
+    <p class="text-gray-700 mb-6">Track your daily activities, generate reports, and stay productive during your training.</p>
+    <img src="images/iita.jpg" alt="IITA Campus" class="mx-auto w-full max-w-2xl rounded shadow">
+  </section>
+<!-- INSERT THIS RIGHT AFTER HERO SECTION (before #entries section) -->
+<section class="bg-white py-16 px-6 text-center">
+  <div class="max-w-4xl mx-auto">
+    <h2 class="text-3xl font-bold text-green-800 mb-4">About IITA</h2>
+    <p class="text-gray-700 mb-6">The International Institute of Tropical Agriculture (IITA) empowers students and professionals by supporting agriculture and research innovations for Africa’s development.</p>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left mt-10">
+      <div class="bg-green-50 p-6 rounded shadow hover:shadow-lg transition">
+        <h3 class="text-lg font-semibold text-green-700 mb-2">Our Mission</h3>
+        <p class="text-sm text-gray-700">To enhance food security, improve livelihoods, and promote sustainable agriculture in tropical Africa through training, partnerships, and innovation.</p>
+      </div>
+      <div class="bg-green-50 p-6 rounded shadow hover:shadow-lg transition">
+        <h3 class="text-lg font-semibold text-green-700 mb-2">Programs</h3>
+        <ul class="list-disc list-inside text-sm text-gray-700">
+          <li>Industrial Training (SIWES)</li>
+          <li>Graduate Research Opportunities</li>
+          <li>Agricultural Field Internships</li>
+        </ul>
+      </div>
+      <div class="bg-green-50 p-6 rounded shadow hover:shadow-lg transition">
+        <h3 class="text-lg font-semibold text-green-700 mb-2">Why Choose IITA?</h3>
+        <p class="text-sm text-gray-700">IITA is recognized globally for its research excellence, modern facilities, mentorship, and opportunities to work on real-world agricultural problems.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY SECTION -->
+<section class="bg-green-100 py-16 px-6">
+  <div class="max-w-6xl mx-auto text-center">
+    <h2 class="text-3xl font-bold text-green-800 mb-6">Life at IITA</h2>
+    <p class="text-gray-700 mb-10 max-w-xl mx-auto">A glimpse into IITA's campus life, training sessions, and agricultural research fields.</p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+     <img src="images/iita.jpg" alt="IITA Gallery 1" class="w-full h-48 object-cover rounded shadow hover:scale-105 transition duration-300">
+<img src="images/iita2.jpeg" alt="IITA Gallery 2" class="w-full h-48 object-cover rounded shadow hover:scale-105 transition duration-300">
+<img src="images/iita3.jpeg" alt="IITA Gallery 3" class="w-full h-48 object-cover rounded shadow hover:scale-105 transition duration-300">
+<img src="images/iita4.jpeg" alt="IITA Gallery 3" class="w-full h-48 object-cover rounded shadow hover:scale-105 transition duration-300">
+<img src="images/iita5.jpeg" alt="IITA Gallery 3" class="w-full h-48 object-cover rounded shadow hover:scale-105 transition duration-300">
+<img src="images/iita6.jpeg" alt="IITA Gallery 3" class="w-full h-48 object-cover rounded shadow hover:scale-105 transition duration-300">
+    </div>
+  </div>
+</section>
+
+  
+
+  <!-- Loading Spinner -->
+  <div id="spinner" class="fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center z-50 hidden">
+    <div class="w-12 h-12 border-4 border-white rounded-full spinner"></div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-green-900 text-white py-10 px-6 mt-20">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row sm:justify-between gap-8">
+      <div class="flex flex-col items-start gap-2">
+        <img src="images/iita.png" alt="IITA Logo" class="h-12" />
+        <h2 class="font-semibold text-lg">IITA Logbook Portal</h2>
+        <p class="text-sm text-gray-300">Tracking progress. Empowering students.</p>
+      </div>
+      <div class="flex flex-col gap-2">
+        <h3 class="font-semibold mb-1">Pages</h3>
+        <a href="#home" class="text-sm hover:underline">Home</a>
+        <a href="#entries" class="text-sm hover:underline">Entries</a>
+        <a href="#report" class="text-sm hover:underline">Report</a>
+        <a href="#dashboard" class="text-sm hover:underline">Dashboard</a>
+      </div>
+      <div class="flex flex-col gap-2">
+        <h3 class="font-semibold mb-1">Resources</h3>
+        <a href="#" class="text-sm hover:underline">Student Guide</a>
+        <a href="#" class="text-sm hover:underline">Support</a>
+        <a href="#" class="text-sm hover:underline">Privacy Policy</a>
+      </div>
+      <div class="flex flex-col gap-2">
+        <h3 class="font-semibold mb-1">Contact</h3>
+        <p class="text-sm">IITA Headquarters<br>Ibadan, Nigeria</p>
+        <p class="text-sm">+234 123 456 7890</p>
+      </div>
+    </div>
+    <div class="text-center text-xs text-gray-400 mt-10">
+      &copy; 2025 IITA. All rights reserved.
+    </div>
+  </footer>
+
+  <!-- Firebase & JS -->
+  <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore-compat.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyDbNz-RNef9HTz1QxqTF4SGdSlOd7zRCNE",
+      authDomain: "iitapro.firebaseapp.com",
+      projectId: "iitapro",
+      storageBucket: "iitapro.appspot.com",
+      messagingSenderId: "390594034949",
+      appId: "1:390594034949:web:a9560d8ab874addb654b6c"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    async function loadEntries() {
+      const spinner = document.getElementById("spinner");
+      spinner.classList.remove("hidden");
+      try {
+        const snapshot = await db.collection("logbook").get();
+        const container = document.getElementById("entryList");
+        container.innerHTML = "";
+        const entries = [];
+        snapshot.forEach(doc => entries.push(doc.data()));
+        entries.sort((a, b) => b.timestamp?.seconds - a.timestamp?.seconds);
+        entries.slice(0, 2).forEach(entry => {
+          container.innerHTML += `
+            <div class="min-w-[200px] bg-gray-100 p-3 rounded shadow">
+              <p class="text-green-700 font-semibold">${entry.date}</p>
+              <p>${entry.activity}</p>
+              <p class="text-xs text-gray-500">Hours: ${entry.hours}</p>
+            </div>`;
+        });
+      } catch (err) {
+        console.error(err);
+      } finally {
+        spinner.classList.add("hidden");
+      }
+    }
+    loadEntries();
+
+    document.getElementById("menuToggle").addEventListener("click", () => {
+      document.getElementById("mobileMenu").classList.toggle("hidden");
+    });
+  </script>
+</body>
+</html>

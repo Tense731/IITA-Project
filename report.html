@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Weekly Report</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore-compat.js"></script>
+
+  <!-- jsPDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyDbNz-RNef9HTz1QxqTF4SGdSlOd7zRCNE",
+      authDomain: "iitapro.firebaseapp.com",
+      projectId: "iitapro",
+      storageBucket: "iitapro.appspot.com",
+      messagingSenderId: "390594034949",
+      appId: "1:390594034949:web:a9560d8ab874addb654b6c"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+  </script>
+</head>
+
+<body class="bg-gray-100 min-h-screen flex flex-col items-center justify-center p-4">
+  <div class="bg-white p-6 rounded shadow w-full max-w-2xl">
+    <h2 class="text-2xl font-bold text-green-700 mb-4 text-center">Generated Weekly Report</h2>
+    <div id="report" class="whitespace-pre-line bg-gray-50 p-4 border rounded mb-4"></div>
+    <button id="downloadBtn" class="bg-green-700 text-white px-4 py-2 rounded hover:bg-green-800 w-full">
+      Download as PDF
+    </button>
+  </div>
+
+  <script>
+    let reportContent = ""; // Global for PDF use
+
+    auth.onAuthStateChanged(async (user) => {
+      if (!user) {
+        window.location.href = "login.html";
+        return;
+      }
+
+      const reportDiv = document.getElementById("report");
+
+      try {
+        const snapshot = await db.collection("logbook")
+          .doc(user.uid)
+          .collection("entries")
+          .orderBy("date", "asc")
+          .get();
+
+        if (snapshot.empty) {
+          reportContent = "No entries found.";
+          reportDiv.textContent = reportContent;
+          return;
+        }
+
+        let totalHours = 0;
+        reportContent = "This week's logbook summary:\n\n";
+
+        snapshot.forEach(doc => {
+          const data = doc.data();
+          const entryDate = new Date(data.date).toDateString();
+          reportContent += ` ${entryDate}\n Hours: ${data.hours}\n Activity: ${data.activity}\n\n`;
+          totalHours += data.hours;
+        });
+
+        reportContent += `Total Hours Worked: ${totalHours} hours`;
+
+        reportDiv.textContent = reportContent;
+
+      } catch (error) {
+        console.error("Error generating report:", error);
+        reportContent = "Failed to generate report.";
+        reportDiv.textContent = reportContent;
+      }
+    });
+
+    document.getElementById("downloadBtn").addEventListener("click", () => {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+
+      const lines = doc.splitTextToSize(reportContent, 180); // Wrap text
+      doc.text(lines, 15, 20);
+      doc.save("weekly-report.pdf");
+    });
+  </script>
+</body>
+</html>
