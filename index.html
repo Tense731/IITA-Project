@@ -6,7 +6,8 @@
   <title>IITA Logbook Portal</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <!-- Open Graph Meta Tags -->
 <meta property="og:title" content="IITA Logbook Portal"/>
 <meta property="og:description" content="Track your daily training activities, generate reports, and stay productive at IITA. It is a digital platform designed to help students and interns document their daily training activities, monitor progress, and generate weekly or final reports with ease. It simplifies record-keeping, promotes accountability, and enhances productivity throughout the industrial training period." />
@@ -15,25 +16,169 @@
 <meta property="og:type" content="website" />
 
   <style>
-    body { font-family: 'Inter', sans-serif; }
+    * {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    
+    .font-poppins {
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    /* Smooth animations */
+    * {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    /* Custom animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes fadeInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    
+    @keyframes fadeInRight {
+      from {
+        opacity: 0;
+        transform: translateX(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    
+    @keyframes scaleIn {
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+    
+    .animate-fadeInUp {
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
+    
+    .animate-fadeInLeft {
+      animation: fadeInLeft 0.8s ease-out forwards;
+    }
+    
+    .animate-fadeInRight {
+      animation: fadeInRight 0.8s ease-out forwards;
+    }
+    
+    .animate-scaleIn {
+      animation: scaleIn 0.6s ease-out forwards;
+    }
+    
+    .animate-delay-200 {
+      animation-delay: 0.2s;
+    }
+    
+    .animate-delay-400 {
+      animation-delay: 0.4s;
+    }
+    
+    .animate-delay-600 {
+      animation-delay: 0.6s;
+    }
+    
+    /* Hover effects */
+    .hover-lift {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .hover-lift:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    }
+    
+    .btn-primary {
+      background: linear-gradient(135deg, #059669, #047857);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+    
+    .btn-primary:hover::before {
+      left: 100%;
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(5, 150, 105, 0.3);
+    }
+    
+    /* Navbar animations */
+    .navbar-slide {
+      transform: translateY(-100%);
+      animation: slideDown 0.6s ease-out forwards;
+    }
+    
+    @keyframes slideDown {
+      to {
+        transform: translateY(0);
+      }
+    }
+    
+    /* Image hover effects */
+    .image-hover {
+      transition: transform 0.4s ease, filter 0.4s ease;
+    }
+    
+    .image-hover:hover {
+      transform: scale(1.05);
+      filter: brightness(1.1);
+    }
+    
     .spinner { border-top-color: #fff; animation: spin 1s linear infinite; }
     @keyframes spin { 100% { transform: rotate(360deg); } }
   </style>
 </head>
 <body class="bg-gray-100">
   <!-- Navbar -->
-  <header class="bg-white shadow fixed w-full z-50">
+  <header class="bg-white/95 backdrop-blur-md shadow-lg fixed w-full z-50 navbar-slide">
     <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
       <div class="flex items-center gap-2">
-        <img src="images/iita.png" alt="IITA Logo" class="h-12">
+        <img src="images/iita.png" alt="IITA Logo" class="h-12 animate-scaleIn">
       </div>
       <div class="hidden md:flex items-center space-x-6">
-        <a href="index.html" class="text-sm text-gray-700 hover:text-green-700">Home</a>
-        <a href="entries.html" class="text-sm text-gray-700 hover:text-green-700">Entries</a>
-        <a href="report.html" class="text-sm text-gray-700 hover:text-green-700">Report</a>
-        <a href="dashboard.html" class="text-sm text-gray-700 hover:text-green-700">Dashboard</a>
-        <button class="bg-green-700 text-white px-4 py-1 rounded" ><a href="login.html">Login</a></button>
-        <button class="border border-green-700 text-green-700 px-4 py-1 rounded"><a href="signup.html">Sign Up</a></button>
+        <a href="index.html" class="text-sm font-medium text-gray-700 hover:text-green-700 hover:scale-105 transition-all duration-300">Home</a>
+        <a href="entries.html" class="text-sm font-medium text-gray-700 hover:text-green-700 hover:scale-105 transition-all duration-300">Entries</a>
+        <a href="report.html" class="text-sm font-medium text-gray-700 hover:text-green-700 hover:scale-105 transition-all duration-300">Report</a>
+        <a href="dashboard.html" class="text-sm font-medium text-gray-700 hover:text-green-700 hover:scale-105 transition-all duration-300">Dashboard</a>
+        <button class="btn-primary text-white px-6 py-2 rounded-lg font-medium"><a href="login.html">Login</a></button>
+        <button class="border-2 border-green-700 text-green-700 px-6 py-2 rounded-lg font-medium hover:bg-green-700 hover:text-white hover:scale-105 transition-all duration-300"><a href="signup.html">Sign Up</a></button>
       </div>
       <div class="md:hidden">
         <button id="menuToggle" class="focus:outline-none">
@@ -55,49 +200,73 @@
   </header>
 
   <!-- Hero Section -->
-  <section id="home" class="pt-28 pb-10 bg-green-100 text-center">
-    <h1 class="text-4xl font-bold text-green-800 mb-4">Welcome to IITA Logbook Portal</h1>
-    <p class="text-gray-700 mb-6">Track your daily activities, generate reports, and stay productive during your training.</p>
-    <img src="images/iita.jpg" alt="IITA Campus" class="mx-auto w-full max-w-2xl rounded shadow">
+  <section id="home" class="pt-28 pb-16 bg-gradient-to-br from-green-50 via-green-100 to-emerald-50 text-center relative overflow-hidden">
+    <div class="absolute inset-0 bg-white/20"></div>
+    <div class="relative z-10">
+      <h1 class="text-5xl md:text-6xl font-bold font-poppins text-green-800 mb-6 animate-fadeInUp">
+        Welcome to <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-emerald-600">IITA</span> Logbook Portal
+      </h1>
+      <p class="text-xl text-gray-700 mb-8 max-w-2xl mx-auto animate-fadeInUp animate-delay-200">Track your daily activities, generate reports, and stay productive during your training.</p>
+      <div class="flex justify-center gap-4 mb-10 animate-fadeInUp animate-delay-400">
+        <a href="signup.html" class="btn-primary text-white px-8 py-4 rounded-xl font-semibold text-lg">Get Started</a>
+        <a href="login.html" class="border-2 border-green-700 text-green-700 px-8 py-4 rounded-xl font-semibold text-lg hover:bg-green-700 hover:text-white transition-all duration-300">Sign In</a>
+      </div>
+      <img src="images/iita.jpg" alt="IITA Campus" class="mx-auto w-full max-w-4xl rounded-2xl shadow-2xl animate-scaleIn animate-delay-600 image-hover">
+    </div>
   </section>
 <!-- INSERT THIS RIGHT AFTER HERO SECTION (before #entries section) -->
 <section class="bg-white py-16 px-6 text-center">
   <div class="max-w-4xl mx-auto">
-    <h2 class="text-3xl font-bold text-green-800 mb-4">About IITA</h2>
-    <p class="text-gray-700 mb-6">The International Institute of Tropical Agriculture (IITA) empowers students and professionals by supporting agriculture and research innovations for Africa’s development.</p>
+    <h2 class="text-4xl font-bold font-poppins text-green-800 mb-6 animate-fadeInUp">About IITA</h2>
+    <p class="text-xl text-gray-700 mb-10 animate-fadeInUp animate-delay-200">The International Institute of Tropical Agriculture (IITA) empowers students and professionals by supporting agriculture and research innovations for Africa's development.</p>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left mt-10">
-      <div class="bg-green-50 p-6 rounded shadow hover:shadow-lg transition">
-        <h3 class="text-lg font-semibold text-green-700 mb-2">Our Mission</h3>
-        <p class="text-sm text-gray-700">To enhance food security, improve livelihoods, and promote sustainable agriculture in tropical Africa through training, partnerships, and innovation.</p>
+      <div class="bg-gradient-to-br from-green-50 to-emerald-50 p-8 rounded-2xl shadow-lg hover-lift animate-fadeInLeft">
+        <div class="w-12 h-12 bg-green-600 rounded-xl flex items-center justify-center mb-4">
+          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-semibold font-poppins text-green-700 mb-3">Our Mission</h3>
+        <p class="text-gray-700 leading-relaxed">To enhance food security, improve livelihoods, and promote sustainable agriculture in tropical Africa through training, partnerships, and innovation.</p>
       </div>
-      <div class="bg-green-50 p-6 rounded shadow hover:shadow-lg transition">
-        <h3 class="text-lg font-semibold text-green-700 mb-2">Programs</h3>
-        <ul class="list-disc list-inside text-sm text-gray-700">
+      <div class="bg-gradient-to-br from-green-50 to-emerald-50 p-8 rounded-2xl shadow-lg hover-lift animate-fadeInUp animate-delay-200">
+        <div class="w-12 h-12 bg-green-600 rounded-xl flex items-center justify-center mb-4">
+          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-semibold font-poppins text-green-700 mb-3">Programs</h3>
+        <ul class="space-y-2 text-gray-700">
           <li>Industrial Training (SIWES)</li>
           <li>Graduate Research Opportunities</li>
           <li>Agricultural Field Internships</li>
         </ul>
       </div>
-      <div class="bg-green-50 p-6 rounded shadow hover:shadow-lg transition">
-        <h3 class="text-lg font-semibold text-green-700 mb-2">Why Choose IITA?</h3>
-        <p class="text-sm text-gray-700">IITA is recognized globally for its research excellence, modern facilities, mentorship, and opportunities to work on real-world agricultural problems.</p>
+      <div class="bg-gradient-to-br from-green-50 to-emerald-50 p-8 rounded-2xl shadow-lg hover-lift animate-fadeInRight animate-delay-400">
+        <div class="w-12 h-12 bg-green-600 rounded-xl flex items-center justify-center mb-4">
+          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-semibold font-poppins text-green-700 mb-3">Why Choose IITA?</h3>
+        <p class="text-gray-700 leading-relaxed">IITA is recognized globally for its research excellence, modern facilities, mentorship, and opportunities to work on real-world agricultural problems.</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- GALLERY SECTION -->
-<section class="bg-green-100 py-16 px-6">
+<section class="bg-gradient-to-br from-green-100 via-emerald-50 to-green-100 py-20 px-6">
   <div class="max-w-6xl mx-auto text-center">
-    <h2 class="text-3xl font-bold text-green-800 mb-6">Life at IITA</h2>
-    <p class="text-gray-700 mb-10 max-w-xl mx-auto">A glimpse into IITA's campus life, training sessions, and agricultural research fields.</p>
+    <h2 class="text-4xl font-bold font-poppins text-green-800 mb-6 animate-fadeInUp">Life at IITA</h2>
+    <p class="text-xl text-gray-700 mb-12 max-w-2xl mx-auto animate-fadeInUp animate-delay-200">A glimpse into IITA's campus life, training sessions, and agricultural research fields.</p>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-     <img src="images/iita.jpg" alt="IITA Gallery 1" class="w-full h-48 object-cover rounded shadow hover:scale-105 transition duration-300">
-<img src="images/iita2.jpeg" alt="IITA Gallery 2" class="w-full h-48 object-cover rounded shadow hover:scale-105 transition duration-300">
-<img src="images/iita3.jpeg" alt="IITA Gallery 3" class="w-full h-48 object-cover rounded shadow hover:scale-105 transition duration-300">
-<img src="images/iita4.jpeg" alt="IITA Gallery 3" class="w-full h-48 object-cover rounded shadow hover:scale-105 transition duration-300">
-<img src="images/iita5.jpeg" alt="IITA Gallery 3" class="w-full h-48 object-cover rounded shadow hover:scale-105 transition duration-300">
-<img src="images/iita6.jpeg" alt="IITA Gallery 3" class="w-full h-48 object-cover rounded shadow hover:scale-105 transition duration-300">
+     <img src="images/iita.jpg" alt="IITA Gallery 1" class="w-full h-64 object-cover rounded-2xl shadow-lg hover:scale-105 hover:shadow-2xl transition-all duration-500 animate-scaleIn">
+<img src="images/iita2.jpeg" alt="IITA Gallery 2" class="w-full h-64 object-cover rounded-2xl shadow-lg hover:scale-105 hover:shadow-2xl transition-all duration-500 animate-scaleIn animate-delay-200">
+<img src="images/iita3.jpeg" alt="IITA Gallery 3" class="w-full h-64 object-cover rounded-2xl shadow-lg hover:scale-105 hover:shadow-2xl transition-all duration-500 animate-scaleIn animate-delay-400">
+<img src="images/iita4.jpeg" alt="IITA Gallery 4" class="w-full h-64 object-cover rounded-2xl shadow-lg hover:scale-105 hover:shadow-2xl transition-all duration-500 animate-scaleIn animate-delay-600">
+<img src="images/iita5.jpeg" alt="IITA Gallery 5" class="w-full h-64 object-cover rounded-2xl shadow-lg hover:scale-105 hover:shadow-2xl transition-all duration-500 animate-scaleIn animate-delay-200">
+<img src="images/iita6.jpeg" alt="IITA Gallery 6" class="w-full h-64 object-cover rounded-2xl shadow-lg hover:scale-105 hover:shadow-2xl transition-all duration-500 animate-scaleIn animate-delay-400">
     </div>
   </div>
 </section>
@@ -110,33 +279,33 @@
   </div>
 
   <!-- Footer -->
-  <footer class="bg-green-900 text-white py-10 px-6 mt-20">
+  <footer class="bg-gradient-to-r from-green-900 via-green-800 to-emerald-900 text-white py-16 px-6 mt-20">
     <div class="max-w-6xl mx-auto flex flex-col sm:flex-row sm:justify-between gap-8">
       <div class="flex flex-col items-start gap-2">
-        <img src="images/iita.png" alt="IITA Logo" class="h-12" />
-        <h2 class="font-semibold text-lg">IITA Logbook Portal</h2>
-        <p class="text-sm text-gray-300">Tracking progress. Empowering students.</p>
+        <img src="images/iita.png" alt="IITA Logo" class="h-12 animate-scaleIn" />
+        <h2 class="font-bold text-xl font-poppins">IITA Logbook Portal</h2>
+        <p class="text-green-200">Tracking progress. Empowering students.</p>
       </div>
       <div class="flex flex-col gap-2">
-        <h3 class="font-semibold mb-1">Pages</h3>
-        <a href="#home" class="text-sm hover:underline">Home</a>
-        <a href="#entries" class="text-sm hover:underline">Entries</a>
-        <a href="#report" class="text-sm hover:underline">Report</a>
-        <a href="#dashboard" class="text-sm hover:underline">Dashboard</a>
+        <h3 class="font-semibold mb-2 font-poppins">Pages</h3>
+        <a href="#home" class="text-green-200 hover:text-white hover:translate-x-2 transition-all duration-300">Home</a>
+        <a href="#entries" class="text-green-200 hover:text-white hover:translate-x-2 transition-all duration-300">Entries</a>
+        <a href="#report" class="text-green-200 hover:text-white hover:translate-x-2 transition-all duration-300">Report</a>
+        <a href="#dashboard" class="text-green-200 hover:text-white hover:translate-x-2 transition-all duration-300">Dashboard</a>
       </div>
       <div class="flex flex-col gap-2">
-        <h3 class="font-semibold mb-1">Resources</h3>
-        <a href="#" class="text-sm hover:underline">Student Guide</a>
-        <a href="#" class="text-sm hover:underline">Support</a>
-        <a href="#" class="text-sm hover:underline">Privacy Policy</a>
+        <h3 class="font-semibold mb-2 font-poppins">Resources</h3>
+        <a href="#" class="text-green-200 hover:text-white hover:translate-x-2 transition-all duration-300">Student Guide</a>
+        <a href="#" class="text-green-200 hover:text-white hover:translate-x-2 transition-all duration-300">Support</a>
+        <a href="#" class="text-green-200 hover:text-white hover:translate-x-2 transition-all duration-300">Privacy Policy</a>
       </div>
       <div class="flex flex-col gap-2">
-        <h3 class="font-semibold mb-1">Contact</h3>
-        <p class="text-sm">IITA Headquarters<br>Ibadan, Nigeria</p>
-        <p class="text-sm">+234 123 456 7890</p>
+        <h3 class="font-semibold mb-2 font-poppins">Contact</h3>
+        <p class="text-green-200">IITA Headquarters<br>Ibadan, Nigeria</p>
+        <p class="text-green-200">+234 123 456 7890</p>
       </div>
     </div>
-    <div class="text-center text-xs text-gray-400 mt-10">
+    <div class="text-center text-green-300 mt-12 pt-8 border-t border-green-700">
       &copy; 2025 IITA. All rights reserved.
     </div>
   </footer>
