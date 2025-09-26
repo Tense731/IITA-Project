@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>IITA Logbook Portal</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="theme.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -165,9 +166,9 @@
     @keyframes spin { 100% { transform: rotate(360deg); } }
   </style>
 </head>
-<body class="bg-gray-100">
+<body class="bg-gray-100 transition-colors duration-300">
   <!-- Navbar -->
-  <header class="bg-white/95 backdrop-blur-md shadow-lg fixed w-full z-50 navbar-slide">
+  <header class="bg-white/95 backdrop-blur-md shadow-lg fixed w-full z-40 navbar-slide">
     <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
       <div class="flex items-center gap-2">
         <img src="images/iita.png" alt="IITA Logo" class="h-12 animate-scaleIn">
@@ -325,6 +326,9 @@
     };
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
+  </script>
+  <script src="theme.js"></script>
+  <script>
 
     async function loadEntries() {
       const spinner = document.getElementById("spinner");

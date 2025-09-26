@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Logbook Entry</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="theme.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -110,7 +111,7 @@
   </script>
 </head>
 
-<body class="bg-gradient-to-br from-green-50 via-emerald-50 to-green-100 min-h-screen flex items-center justify-center p-4">
+<body class="bg-gradient-to-br from-green-50 via-emerald-50 to-green-100 min-h-screen flex items-center justify-center p-4 transition-colors duration-300">
   <div class="bg-white/90 backdrop-blur-md p-8 rounded-3xl shadow-2xl w-full max-w-lg animate-scaleIn">
     <div class="text-center mb-8 animate-fadeInUp">
       <div class="w-16 h-16 bg-gradient-to-r from-green-600 to-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
@@ -183,5 +184,6 @@
       });
     });
   </script>
+  <script src="theme.js"></script>
 </body>
 </html>

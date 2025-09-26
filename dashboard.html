@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>IITA Dashboard</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="theme.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -96,7 +97,7 @@
     const db = firebase.firestore();
   </script>
 </head>
-<body class="bg-gradient-to-br from-green-50 via-emerald-50 to-green-100 min-h-screen">
+<body class="bg-gradient-to-br from-green-50 via-emerald-50 to-green-100 min-h-screen transition-colors duration-300">
   <div class="max-w-6xl mx-auto p-6">
     <!-- Header Section -->
     <div class="flex justify-between items-center mb-10 animate-fadeInUp">
@@ -182,5 +183,6 @@
       });
     });
   </script>
+  <script src="theme.js"></script>
 </body>
 </html>
