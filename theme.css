@@ -1,0 +1,250 @@
+/* Theme CSS Variables and Dark Mode Styles */
+:root {
+  /* Light theme colors */
+  --bg-primary: #f8fafc;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #f1f5f9;
+  --bg-gradient-start: #f0fdf4;
+  --bg-gradient-end: #ecfdf5;
+  --text-primary: #1f2937;
+  --text-secondary: #6b7280;
+  --text-accent: #059669;
+  --border-color: #e5e7eb;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --card-bg: rgba(255, 255, 255, 0.9);
+  --input-bg: #ffffff;
+  --navbar-bg: rgba(255, 255, 255, 0.95);
+}
+
+[data-theme="dark"] {
+  /* Dark theme colors */
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --bg-tertiary: #334155;
+  --bg-gradient-start: #064e3b;
+  --bg-gradient-end: #065f46;
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-accent: #10b981;
+  --border-color: #475569;
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --card-bg: rgba(30, 41, 59, 0.9);
+  --input-bg: #334155;
+  --navbar-bg: rgba(30, 41, 59, 0.95);
+}
+
+/* Base styles that use CSS variables */
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Gradient backgrounds */
+.bg-gradient-to-br {
+  background: linear-gradient(to bottom right, var(--bg-gradient-start), var(--bg-gradient-end));
+}
+
+/* Card backgrounds */
+.bg-white\/90,
+.bg-white\/80 {
+  background: var(--card-bg);
+  backdrop-filter: blur(10px);
+}
+
+/* Input styles */
+input, textarea, select {
+  background: var(--input-bg);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: var(--text-accent);
+}
+
+/* Navbar */
+header {
+  background: var(--navbar-bg);
+}
+
+/* Text colors */
+.text-gray-700 {
+  color: var(--text-secondary);
+}
+
+.text-gray-600 {
+  color: var(--text-secondary);
+}
+
+.text-gray-800 {
+  color: var(--text-primary);
+}
+
+.text-gray-900 {
+  color: var(--text-primary);
+}
+
+.text-green-700,
+.text-green-600 {
+  color: var(--text-accent);
+}
+
+/* Additional text color classes */
+.text-gray-500 {
+  color: var(--text-secondary);
+}
+
+.text-gray-400 {
+  color: var(--text-secondary);
+}
+
+/* Border colors */
+.border-gray-200,
+.border-gray-100 {
+  border-color: var(--border-color);
+}
+
+.border-gray-300 {
+  border-color: var(--border-color);
+}
+
+/* Shadow adjustments */
+.shadow-lg,
+.shadow-xl,
+.shadow-2xl {
+  box-shadow: 0 10px 25px var(--shadow-color);
+}
+
+/* Background colors */
+.bg-gray-50 {
+  background: var(--bg-tertiary);
+}
+
+.bg-gray-100 {
+  background: var(--bg-tertiary);
+}
+
+.bg-gray-200 {
+  background: var(--bg-secondary);
+}
+
+/* Table styles */
+.table-row:hover {
+  background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+}
+
+/* Button hover states */
+.hover-lift:hover {
+  box-shadow: 0 20px 40px var(--shadow-color);
+}
+
+/* Footer dark mode */
+[data-theme="dark"] footer {
+  background: linear-gradient(to right, #0f172a, #1e293b, #0f172a);
+}
+
+/* Mobile menu dark mode */
+[data-theme="dark"] #mobileMenu {
+  background: var(--bg-secondary);
+}
+
+/* Ensure all headings use primary text color */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-primary);
+}
+
+/* Ensure paragraphs use appropriate text color */
+p {
+  color: var(--text-secondary);
+}
+
+/* Specific overrides for colored text that should remain colored */
+.text-green-700,
+.text-green-600,
+.text-green-800 {
+  color: var(--text-accent) !important;
+}
+
+.text-blue-600,
+.text-blue-700 {
+  color: #3b82f6;
+}
+
+[data-theme="dark"] .text-blue-600,
+[data-theme="dark"] .text-blue-700 {
+  color: #60a5fa;
+}
+
+.text-purple-600,
+.text-purple-700 {
+  color: #9333ea;
+}
+
+[data-theme="dark"] .text-purple-600,
+[data-theme="dark"] .text-purple-700 {
+  color: #a855f7;
+}
+
+.text-red-600,
+.text-red-700 {
+  color: #dc2626;
+}
+
+[data-theme="dark"] .text-red-600,
+[data-theme="dark"] .text-red-700 {
+  color: #f87171;
+}
+
+/* White text should remain white in dark mode */
+.text-white {
+  color: #ffffff !important;
+}
+
+/* Ensure form labels are visible */
+label {
+  color: var(--text-primary);
+}
+
+/* Table text colors */
+table {
+  color: var(--text-primary);
+}
+
+th {
+  color: #ffffff !important;
+}
+
+td {
+  color: var(--text-primary);
+}
+
+/* Link colors */
+a {
+  color: var(--text-accent);
+}
+
+a:hover {
+  color: var(--text-accent);
+  opacity: 0.8;
+}
+
+/* Theme toggle button positioning */
+#themeToggle {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1000;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+}
+
+/* Responsive theme toggle */
+@media (max-width: 768px) {
+  #themeToggle {
+    top: 0.75rem;
+    right: 0.75rem;
+    padding: 0.5rem;
+  }
+}
