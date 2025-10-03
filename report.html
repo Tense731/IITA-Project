@@ -172,60 +172,126 @@
       ← Back to Dashboard
     </a>
   </div>
+<script>
+  let reportContent = ""; // Global for PDF use
+  let reportEntries = []; // Store entries for PDF
 
-  <script>
-    let reportContent = ""; // Global for PDF use
+  auth.onAuthStateChanged(async (user) => {
+    if (!user) {
+      window.location.href = "login.html";
+      return;
+    }
 
-    auth.onAuthStateChanged(async (user) => {
-      if (!user) {
-        window.location.href = "login.html";
+    const reportDiv = document.getElementById("report");
+
+    try {
+      const snapshot = await db.collection("logbook")
+        .doc(user.uid)
+        .collection("entries")
+        .orderBy("date", "asc")
+        .get();
+
+      if (snapshot.empty) {
+        reportContent = "No entries found.";
+        reportDiv.textContent = reportContent;
         return;
       }
 
-      const reportDiv = document.getElementById("report");
+      let totalHours = 0;
+      reportContent = "This week's logbook summary:\n\n";
+      reportEntries = [];
 
-      try {
-        const snapshot = await db.collection("logbook")
-          .doc(user.uid)
-          .collection("entries")
-          .orderBy("date", "asc")
-          .get();
-
-        if (snapshot.empty) {
-          reportContent = "No entries found.";
-          reportDiv.textContent = reportContent;
-          return;
-        }
-
-        let totalHours = 0;
-        reportContent = "This week's logbook summary:\n\n";
-
-        snapshot.forEach(doc => {
-          const data = doc.data();
-          const entryDate = new Date(data.date).toDateString();
-          reportContent += ` ${entryDate}\n Hours: ${data.hours}\n Activity: ${data.activity}\n\n`;
-          totalHours += data.hours;
+      snapshot.forEach(doc => {
+        const data = doc.data();
+        const entryDate = new Date(data.date).toDateString();
+        reportContent += ` ${entryDate}\n Hours: ${data.hours}\n Activity: ${data.activity}\n\n`;
+        totalHours += data.hours;
+        reportEntries.push({
+          date: entryDate,
+          hours: data.hours,
+          activity: data.activity,
+          imageUrl: data.imageUrl || ""
         });
+      });
 
-        reportContent += `Total Hours Worked: ${totalHours} hours`;
+      reportContent += `Total Hours Worked: ${totalHours} hours`;
 
-        reportDiv.textContent = reportContent;
+      // Show entries with images in the HTML report
+      let htmlReport = "<strong>This week's logbook summary:</strong><br><br>";
+      reportEntries.forEach(entry => {
+        htmlReport += `<div style="margin-bottom:1.5em;">
+          <strong>${entry.date}</strong><br>
+          Hours: ${entry.hours}<br>
+          Activity: ${entry.activity}<br>`;
+        if (entry.imageUrl) {
+          htmlReport += `<img src="${entry.imageUrl}" alt="Entry Photo" style="max-width:120px;max-height:120px;border-radius:8px;margin-top:6px;" /><br>`;
+        }
+        htmlReport += `</div>`;
+      });
+      htmlReport += `<strong>Total Hours Worked: ${totalHours} hours</strong>`;
+      reportDiv.innerHTML = htmlReport;
 
-      } catch (error) {
-        console.error("Error generating report:", error);
-        reportContent = "Failed to generate report.";
-        reportDiv.textContent = reportContent;
+    } catch (error) {
+      console.error("Error generating report:", error);
+      reportContent = "Failed to generate report.";
+      reportDiv.textContent = reportContent;
+    }
+  });
+
+  document.getElementById("downloadBtn").addEventListener("click", async () => {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    let y = 20;
+    doc.setFontSize(14);
+    doc.text("This week's logbook summary:", 15, y);
+    y += 10;
+
+    for (const entry of reportEntries) {
+      doc.setFontSize(12);
+      doc.text(`${entry.date}`, 15, y);
+      y += 7;
+      doc.text(`Hours: ${entry.hours}`, 15, y);
+      y += 7;
+      doc.text(`Activity: ${entry.activity}`, 15, y);
+      y += 7;
+
+      // If there's an image, add it to the PDF
+      if (entry.imageUrl) {
+        try {
+          // Fetch image and convert to base64
+          const imgResponse = await fetch(entry.imageUrl);
+          const imgBlob = await imgResponse.blob();
+          const reader = new FileReader();
+          reader.readAsDataURL(imgBlob);
+          await new Promise(resolve => reader.onloadend = resolve);
+          const base64data = reader.result;
+
+          doc.addImage(base64data, 'JPEG', 15, y, 30, 30);
+          y += 35;
+        } catch (err) {
+          // If image fails, skip it
+          y += 5;
+        }
+      } else {
+        y += 5;
       }
-    });
 
-    document.getElementById("downloadBtn").addEventListener("click", () => {
-      const { jsPDF } = window.jspdf;
-      const doc = new jsPDF();
+      // Add space between entries
+      y += 5;
+      // If y is near bottom, add new page
+      if (y > 270) {
+        doc.addPage();
+        y = 20;
+      }
+    }
 
-      const lines = doc.splitTextToSize(reportContent, 180); // Wrap text
-      doc.text(lines, 15, 20);
-      doc.save("weekly-report.pdf");
-    });
-  </script>
+    doc.setFontSize(14);
+    doc.text(`Total Hours Worked: ${reportEntries.reduce((sum, e) => sum + e.hours, 0)} hours`, 15, y);
+
+    doc.save("weekly-report.pdf");
+  });
+</script>
+
 </body>
 </html>
