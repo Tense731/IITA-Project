@@ -84,6 +84,21 @@
       transform: translateY(-2px);
       box-shadow: 0 8px 25px rgba(5, 150, 105, 0.15);
     }
+
+    /* Glass effect */
+    .glass {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+
+    /* Gradient text */
+    .gradient-text {
+      background: linear-gradient(135deg, #059669 0%, #10b981 50%, #34d399 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
   </style>
   <!-- Firebase App (Core SDK) -->
 <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app-compat.js"></script>
@@ -108,16 +123,26 @@
 </script>
 
 </head>
-<body class="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 via-emerald-50 to-green-100 p-4">
-  <div class="w-full max-w-md p-6 sm:p-8 space-y-5 sm:space-y-6 bg-white/90 backdrop-blur-md rounded-2xl sm:rounded-3xl shadow-2xl animate-scaleIn">
+<body class="relative min-h-screen flex items-center justify-center p-4 overflow-hidden">
+  <!-- Animated background -->
+  <div class="absolute inset-0 bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50"></div>
+  <div class="absolute inset-0 opacity-20">
+    <div class="absolute top-1/4 right-1/4 w-96 h-96 bg-green-200 rounded-full mix-blend-multiply filter blur-3xl animate-pulse"></div>
+    <div class="absolute bottom-1/4 left-1/4 w-96 h-96 bg-emerald-200 rounded-full mix-blend-multiply filter blur-3xl animate-pulse" style="animation-delay: 2s;"></div>
+  </div>
+
+  <div class="relative z-10 w-full max-w-md p-6 sm:p-10 space-y-6 sm:space-y-8 glass rounded-3xl shadow-2xl animate-scaleIn">
     <div class="text-center">
-      <div class="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r from-green-600 to-emerald-600 rounded-xl sm:rounded-2xl flex items-center justify-center mx-auto mb-3 sm:mb-4">
-        <svg class="w-6 h-6 sm:w-8 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
-        </svg>
+      <div class="relative inline-block mb-4 sm:mb-6">
+        <div class="absolute inset-0 bg-gradient-to-r from-green-400 to-emerald-400 rounded-2xl blur-lg opacity-50"></div>
+        <div class="relative w-14 h-14 sm:w-18 sm:h-18 bg-gradient-to-br from-green-500 to-emerald-500 rounded-2xl flex items-center justify-center shadow-xl">
+          <svg class="w-7 h-7 sm:w-9 sm:h-9 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+          </svg>
+        </div>
       </div>
-      <h1 class="text-2xl sm:text-3xl font-bold font-poppins text-green-700 animate-fadeInUp">IITA Digital Logbook</h1>
-      <p class="text-sm sm:text-base text-gray-600 mt-2 animate-fadeInUp">Sign in to continue your journey</p>
+      <h1 class="text-2xl sm:text-4xl font-bold font-poppins gradient-text animate-fadeInUp mb-2">IITA Digital Logbook</h1>
+      <p class="text-sm sm:text-base text-gray-600 animate-fadeInUp">Sign in to continue your journey</p>
     </div>
 
     <form class="space-y-4 sm:space-y-6 animate-fadeInUp">
