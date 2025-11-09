@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Sign Up</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="theme.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -83,6 +84,21 @@
       transform: translateY(-2px);
       box-shadow: 0 8px 25px rgba(5, 150, 105, 0.15);
     }
+
+    /* Glass effect */
+    .glass {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+
+    /* Gradient text */
+    .gradient-text {
+      background: linear-gradient(135deg, #059669 0%, #10b981 50%, #34d399 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
   </style>
 
   <!-- Firebase SDKs -->
@@ -106,42 +122,52 @@
     const db = firebase.firestore();
   </script>
 </head>
-<body class="bg-gradient-to-br from-green-50 via-emerald-50 to-green-100 min-h-screen flex items-center justify-center">
-  <div class="bg-white/90 backdrop-blur-md p-8 rounded-3xl shadow-2xl w-full max-w-md animate-scaleIn">
-    <div class="text-center mb-8">
-      <div class="w-16 h-16 bg-gradient-to-r from-green-600 to-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
-        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path>
-        </svg>
+<body class="relative min-h-screen flex items-center justify-center p-4 overflow-hidden">
+  <!-- Animated background -->
+  <div class="absolute inset-0 bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50"></div>
+  <div class="absolute inset-0 opacity-20">
+    <div class="absolute top-1/4 left-1/3 w-96 h-96 bg-green-200 rounded-full mix-blend-multiply filter blur-3xl animate-pulse"></div>
+    <div class="absolute bottom-1/4 right-1/3 w-96 h-96 bg-emerald-200 rounded-full mix-blend-multiply filter blur-3xl animate-pulse" style="animation-delay: 2s;"></div>
+  </div>
+
+  <div class="relative z-10 glass p-6 sm:p-10 rounded-3xl shadow-2xl w-full max-w-md animate-scaleIn">
+    <div class="text-center mb-6 sm:mb-8">
+      <div class="relative inline-block mb-4">
+        <div class="absolute inset-0 bg-gradient-to-r from-green-400 to-emerald-400 rounded-2xl blur-lg opacity-50"></div>
+        <div class="relative w-14 h-14 sm:w-18 sm:h-18 bg-gradient-to-br from-green-500 to-emerald-500 rounded-2xl flex items-center justify-center shadow-xl">
+          <svg class="w-7 h-7 sm:w-9 sm:h-9 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path>
+          </svg>
+        </div>
       </div>
-      <h2 class="text-3xl font-bold font-poppins text-green-700 animate-fadeInUp">Create an Account</h2>
-      <p class="text-gray-600 mt-2 animate-fadeInUp">Join the IITA community today</p>
+      <h2 class="text-2xl sm:text-4xl font-bold font-poppins gradient-text animate-fadeInUp mb-2">Create an Account</h2>
+      <p class="text-sm sm:text-base text-gray-600 animate-fadeInUp">Join the IITA community today</p>
     </div>
 
-    <form id="signupForm" class="space-y-6 animate-fadeInUp">
+    <form id="signupForm" class="space-y-4 sm:space-y-6 animate-fadeInUp">
       <div>
         <label for="name" class="block text-sm font-semibold text-gray-700 mb-2">Full Name</label>
-        <input type="text" id="name" placeholder="Enter your full name" required class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-green-500 input-focus transition-all duration-300" />
+        <input type="text" id="name" placeholder="Enter your full name" required class="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base border-2 border-gray-200 rounded-lg sm:rounded-xl focus:outline-none focus:border-green-500 input-focus transition-all duration-300" />
       </div>
-      
+
       <div>
         <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">Email Address</label>
-        <input type="email" id="email" placeholder="Enter your email" required class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-green-500 input-focus transition-all duration-300" />
+        <input type="email" id="email" placeholder="Enter your email" required class="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base border-2 border-gray-200 rounded-lg sm:rounded-xl focus:outline-none focus:border-green-500 input-focus transition-all duration-300" />
       </div>
-      
+
       <div>
         <label for="password" class="block text-sm font-semibold text-gray-700 mb-2">Password</label>
-        <input type="password" id="password" placeholder="Create a strong password" required class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-green-500 input-focus transition-all duration-300" />
+        <input type="password" id="password" placeholder="Create a strong password" required class="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base border-2 border-gray-200 rounded-lg sm:rounded-xl focus:outline-none focus:border-green-500 input-focus transition-all duration-300" />
       </div>
-      
+
         <!-- <button id="googleSignInBtn" class="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded">
   Sign in with Google
 </button> -->
-      <button type="submit" class="w-full py-3 text-white font-semibold btn-primary rounded-xl">Create Account</button>
-      
+      <button type="submit" class="w-full py-2.5 sm:py-3 text-sm sm:text-base text-white font-semibold btn-primary rounded-lg sm:rounded-xl">Create Account</button>
+
     </form>
 
-    <p class="mt-6 text-center text-gray-600 animate-fadeInUp">
+    <p class="mt-5 sm:mt-6 text-center text-sm sm:text-base text-gray-600 animate-fadeInUp">
       Already have an account?
       <a href="login.html" class="text-green-600 font-semibold hover:text-green-700 hover:underline transition-colors duration-300">Login here</a>
     </p>

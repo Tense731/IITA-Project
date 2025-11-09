@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>IITA Dashboard</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="theme.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -75,6 +76,35 @@
       transform: translateY(-2px);
       box-shadow: 0 10px 25px rgba(220, 38, 38, 0.3);
     }
+
+    /* Glassmorphism */
+    .glass {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+
+    /* Gradient text */
+    .gradient-text {
+      background: linear-gradient(135deg, #059669 0%, #10b981 50%, #34d399 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Mobile responsive */
+    @media (max-width: 640px) {
+      .dashboard-header {
+        flex-direction: column;
+        align-items: flex-start !important;
+        gap: 1rem;
+      }
+
+      .dashboard-header > div:first-child {
+        flex-direction: column;
+        align-items: flex-start !important;
+      }
+    }
   </style>
   <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-auth-compat.js"></script>
@@ -96,57 +126,53 @@
     const db = firebase.firestore();
   </script>
 </head>
-<body class="bg-gradient-to-br from-green-50 via-emerald-50 to-green-100 min-h-screen overflow-x-hidden">
-  <div class="w-full max-w-6xl mx-auto px-2 sm:px-4 py-6 box-border">
+<body class="bg-gradient-to-br from-green-50 via-emerald-50 to-green-100 min-h-screen">
+  <div class="max-w-6xl mx-auto p-6">
     <!-- Header Section -->
-    <div class="w-full bg-white/80 backdrop-blur-md rounded-2xl shadow-lg border border-green-100 px-4 py-4 sm:px-8 sm:py-6 mb-8 animate-fadeInUp">
-      <div class="flex flex-col sm:flex-row items-center justify-between gap-4 w-full">
-        <div class="flex items-center space-x-3 sm:space-x-5 w-full">
-          <div class="w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-r from-green-600 to-emerald-600 rounded-2xl flex items-center justify-center flex-shrink-0">
-            <img src="images/iita.jpeg" alt="IITA Logo" class="w-8 h-8 sm:w-10 sm:h-10 rounded-lg" />
-          </div>
-          <div class="flex flex-col">
-            <h1 id="userName" class="text-2xl sm:text-3xl font-bold font-poppins text-green-700 leading-tight">Welcome!</h1>
-            <div class="flex items-center space-x-2 mt-1">
-              <p class="text-gray-600 text-sm sm:text-base leading-tight mb-0">Ready to track your progress?</p>
-              <button id="logoutBtn" class="btn-primary text-white px-4 py-2 rounded-lg font-semibold text-sm shadow-sm">Logout</button>
-            </div>
-          </div>
+    <div class="flex justify-between items-center mb-10 animate-fadeInUp">
+      <div class="flex items-center space-x-4">
+        <div class="w-16 h-16 bg-gradient-to-r from-green-600 to-emerald-600 rounded-2xl flex items-center justify-center">
+          <img src="images/iita.jpeg" alt="IITA Logo" class="w-10 h-10 rounded-lg" />
+        </div>
+        <div>
+          <h1 id="userName" class="text-3xl font-bold font-poppins text-green-700">Welcome!</h1>
+          <p class="text-gray-600">Ready to track your progress?</p>
         </div>
       </div>
+      <button id="logoutBtn" class="btn-primary text-white px-6 py-3 rounded-xl font-semibold">Logout</button>
     </div>
     <hr class="border-t border-green-200 mb-8" />
 
     <!-- Dashboard Links -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-      <a href="logbook.html" class="bg-white/80 backdrop-blur-md p-6 sm:p-8 rounded-2xl shadow-lg hover-lift animate-scaleIn group block">
-        <div class="w-10 h-10 sm:w-12 sm:h-12 bg-green-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-          <svg class="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <a href="logbook.html" class="bg-white/80 backdrop-blur-md p-8 rounded-2xl shadow-lg hover-lift animate-scaleIn group">
+        <div class="w-12 h-12 bg-green-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
           </svg>
         </div>
-        <h2 class="text-lg sm:text-xl font-semibold font-poppins text-green-700 mb-2">New Logbook Entry</h2>
-        <p class="text-gray-600 text-sm sm:text-base">Fill in your daily activities and track your progress.</p>
+        <h2 class="text-xl font-semibold font-poppins text-green-700 mb-2">New Logbook Entry</h2>
+        <p class="text-gray-600">Fill in your daily activities and track your progress.</p>
       </a>
 
-      <a href="entries.html" class="bg-white/80 backdrop-blur-md p-6 sm:p-8 rounded-2xl shadow-lg hover-lift animate-scaleIn animate-delay-200 group block">
-        <div class="w-10 h-10 sm:w-12 sm:h-12 bg-blue-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-          <svg class="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <a href="entries.html" class="bg-white/80 backdrop-blur-md p-8 rounded-2xl shadow-lg hover-lift animate-scaleIn animate-delay-200 group">
+        <div class="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
           </svg>
         </div>
-        <h2 class="text-lg sm:text-xl font-semibold font-poppins text-green-700 mb-2">My Entries</h2>
-        <p class="text-gray-600 text-sm sm:text-base">Review all your submissions and track your journey.</p>
+        <h2 class="text-xl font-semibold font-poppins text-green-700 mb-2">My Entries</h2>
+        <p class="text-gray-600">Review all your submissions and track your journey.</p>
       </a>
 
-      <a href="report.html" class="bg-white/80 backdrop-blur-md p-6 sm:p-8 rounded-2xl shadow-lg hover-lift animate-scaleIn animate-delay-400 group block">
-        <div class="w-10 h-10 sm:w-12 sm:h-12 bg-purple-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-          <svg class="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <a href="report.html" class="bg-white/80 backdrop-blur-md p-8 rounded-2xl shadow-lg hover-lift animate-scaleIn animate-delay-400 group">
+        <div class="w-12 h-12 bg-purple-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
           </svg>
         </div>
-        <h2 class="text-lg sm:text-xl font-semibold font-poppins text-green-700 mb-2">Generate Report</h2>
-        <p class="text-gray-600 text-sm sm:text-base">Download your logbook as PDF for submission.</p>
+        <h2 class="text-xl font-semibold font-poppins text-green-700 mb-2">Generate Report</h2>
+        <p class="text-gray-600">Download your logbook as PDF for submission.</p>
       </a>
     </div>
   </div>

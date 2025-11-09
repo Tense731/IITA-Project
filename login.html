@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>IITA Logbook Login</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="theme.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -83,6 +84,21 @@
       transform: translateY(-2px);
       box-shadow: 0 8px 25px rgba(5, 150, 105, 0.15);
     }
+
+    /* Glass effect */
+    .glass {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+
+    /* Gradient text */
+    .gradient-text {
+      background: linear-gradient(135deg, #059669 0%, #10b981 50%, #34d399 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
   </style>
   <!-- Firebase App (Core SDK) -->
 <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app-compat.js"></script>
@@ -107,43 +123,53 @@
 </script>
 
 </head>
-<body class="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 via-emerald-50 to-green-100">
-  <div class="w-full max-w-md p-8 space-y-6 bg-white/90 backdrop-blur-md rounded-3xl shadow-2xl animate-scaleIn">
+<body class="relative min-h-screen flex items-center justify-center p-4 overflow-hidden">
+  <!-- Animated background -->
+  <div class="absolute inset-0 bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50"></div>
+  <div class="absolute inset-0 opacity-20">
+    <div class="absolute top-1/4 right-1/4 w-96 h-96 bg-green-200 rounded-full mix-blend-multiply filter blur-3xl animate-pulse"></div>
+    <div class="absolute bottom-1/4 left-1/4 w-96 h-96 bg-emerald-200 rounded-full mix-blend-multiply filter blur-3xl animate-pulse" style="animation-delay: 2s;"></div>
+  </div>
+
+  <div class="relative z-10 w-full max-w-md p-6 sm:p-10 space-y-6 sm:space-y-8 glass rounded-3xl shadow-2xl animate-scaleIn">
     <div class="text-center">
-      <div class="w-16 h-16 bg-gradient-to-r from-green-600 to-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
-        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
-        </svg>
+      <div class="relative inline-block mb-4 sm:mb-6">
+        <div class="absolute inset-0 bg-gradient-to-r from-green-400 to-emerald-400 rounded-2xl blur-lg opacity-50"></div>
+        <div class="relative w-14 h-14 sm:w-18 sm:h-18 bg-gradient-to-br from-green-500 to-emerald-500 rounded-2xl flex items-center justify-center shadow-xl">
+          <svg class="w-7 h-7 sm:w-9 sm:h-9 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+          </svg>
+        </div>
       </div>
-      <h1 class="text-3xl font-bold font-poppins text-green-700 animate-fadeInUp">IITA Digital Logbook</h1>
-      <p class="text-gray-600 mt-2 animate-fadeInUp">Sign in to continue your journey</p>
+      <h1 class="text-2xl sm:text-4xl font-bold font-poppins gradient-text animate-fadeInUp mb-2">IITA Digital Logbook</h1>
+      <p class="text-sm sm:text-base text-gray-600 animate-fadeInUp">Sign in to continue your journey</p>
     </div>
 
-    <form class="space-y-6 animate-fadeInUp">
+    <form class="space-y-4 sm:space-y-6 animate-fadeInUp">
       <div>
         <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">Email or Staff ID</label>
-        <input type="text" id="email" name="email" required class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-green-500 input-focus transition-all duration-300" />
+        <input type="text" id="email" name="email" required class="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base border-2 border-gray-200 rounded-lg sm:rounded-xl focus:outline-none focus:border-green-500 input-focus transition-all duration-300" />
       </div>
 
       <div>
         <label for="password" class="block text-sm font-semibold text-gray-700 mb-2">Password</label>
-        <input type="password" id="password" name="password" required class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-green-500 input-focus transition-all duration-300" />
+        <input type="password" id="password" name="password" required class="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base border-2 border-gray-200 rounded-lg sm:rounded-xl focus:outline-none focus:border-green-500 input-focus transition-all duration-300" />
       </div>
 
-      <div class="flex items-center justify-between text-sm font-medium">
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0 text-xs sm:text-sm font-medium">
         <label class="flex items-center">
           <input type="checkbox" class="mr-2 w-4 h-4 text-green-600 rounded focus:ring-green-500"> Remember me
         </label>
         <a href="#" class="text-green-600 hover:text-green-700 hover:underline transition-colors duration-300">Forgot Password?</a>
       </div>
 
-      <button type="submit" class="w-full py-3 text-white font-semibold btn-primary rounded-xl">
+      <button type="submit" class="w-full py-2.5 sm:py-3 text-sm sm:text-base text-white font-semibold btn-primary rounded-lg sm:rounded-xl">
         Sign In
       </button>
     </form>
 
-    <p class="text-center text-gray-600 animate-fadeInUp">
-      Don’t have an account?
+    <p class="text-center text-sm sm:text-base text-gray-600 animate-fadeInUp">
+      Don't have an account?
       <a href="signup.html" class="text-green-600 font-semibold hover:text-green-700 hover:underline transition-colors duration-300">Sign up here</a>
     </p>
   </div>
